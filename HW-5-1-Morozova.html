@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess table</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        function ChessTable() {
+            let t=document.createElement('table');
+            t.style.border="1px solid black";
+            let cellArr=new Array(9);
+            let rowArr=new Array(9);
+            let letter = ['','A','B','C','D','E','F','G','H'];
+            let r=[];
+            let x=0;
+            let y=0;
+            let cellColor=0;
+            document.body.append(t)
+            for (let i=0; i<9; i++){
+                y=document.createElement('tr');
+                t.append(y);
+                for (let j=0; j<9; j++){
+                   console.log(letter[i])
+                   x=document.createElement('td');
+                   x.setAttribute('style','width:50px;height:50px;text-align:center');
+                   cellColor=((i+j)%2==0)?'white':'black';
+                   if ((i==0)||(j==0)) {cellColor='yellow'};
+                   x.style.backgroundColor=cellColor;
+                   if (i==0) {x.innerHTML=letter[j]};
+                   if ((j==0)&&(i!=0)) {x.innerHTML=i};
+                   y.append(x);
+                }
+            }
+        }
+
+        ChessTable()
+
+    </script>
+
+<script>
+
+</script>
+</body>
+</html>

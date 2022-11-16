@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="catalog"></div>
+<script>
+    class Product {
+        constructor(name,price){
+          this.name=name;
+          this.price=price;
+        }
+        display(){
+            let con=document.createElement('div')
+            con.style.display='flex';
+            con.style.justifyContent='center';
+            let pname=document.createElement('h1')
+            pname.style.backgroundColor='yellow'
+            pname.style.margin='20px'
+            pname.innerHTML=this.name
+            let pprice=document.createElement('h1')
+            pprice.style.backgroundColor='yellow'
+            pprice.style.margin='20px'
+            pprice.innerHTML=this.price
+            con.append(pname,pprice)
+            return con
+        }
+    }
+    class Catalog {
+        constructor () {
+            this.products=new Object()
+        }
+        put(product,number=1) {
+            if (!(product instanceof Product)) {alert("В каталог кладут только продукты")}
+            else {this.products[product.name]={"thing":product, "number":number}}
+        }
+        del(product) {
+            delete this.products[product.name]
+        }
+        display(){
+            let div1=document.createElement('div')
+            div1.style.display='flex';
+            div1.style.flexDirection='column';
+            parent=document.getElementById('catalog')
+            parent.append(div1)
+            for (let i in this.products) {
+                let r=this.products[i].thing.display()
+                div1.append(r)
+            }
+        }
+
+        len(){
+            let len=0
+            for (let i in this.products) {
+            len+=this.products[i].number
+            }
+        return len
+        }
+    }
+
+    let catalog=new Catalog();
+    let p1=new Product('Apple', 25);
+    let p2=new Product('Pear', 35);
+    let p3=new Product('Orange', 50);
+    catalog.put(p1);
+    catalog.put(p2,2);
+    catalog.put(p3);
+
+    catalog.display()
+
+</script>
+</body>
+</html>
