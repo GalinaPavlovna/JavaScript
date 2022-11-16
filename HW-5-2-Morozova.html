@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+class Product {
+    constructor(name,price){
+      this.name=name;
+      this.price=price;
+    }
+
+    make25Discount(){
+      this.price=0.75*this.price
+    }
+}
+class Basket {
+    constructor () {
+        this.products=new Object()
+    }
+    put(product,number=1) {
+        if (!(product instanceof Product)) {alert("В корзину кладут только продукты")}
+        else {this.products[product.name]={"thing":product, "number":number}}
+    }
+    del(product) {
+        delete this.products[product.name]
+    }
+    cost(){
+        let cost=0
+        for (let i in this.products) {
+        cost+=this.products[i].number*this.products[i].thing.price;
+        }
+    return cost
+    }
+    len(){
+        let len=0
+        for (let i in this.products) {
+        len+=this.products[i].number
+        }
+    return len
+    }
+}
+
+let basket=new Basket();
+let p1=new Product('Apple', 25);
+let p2=new Product('Pear', 35);
+let p3=new Product('Orange', 50);
+basket.put(p1);
+basket.put(p2,2);
+basket.put(p3);
+
+let div1=document.createElement('div')
+div1.setAttribute('style','background-color:red;border:1px solid black;text-align:center;width:500px;height:100px;margin:0 auto;font-size:16px')
+let x=!basket.cost?"Корзина пуста":`В корзине ${basket.len()} товаров стоимостью ${basket.cost()} рублей`
+div1.innerHTML=`<h1>${x}</h1>`
+document.body.append(div1)
+
+
+
+</script>
+</body>
+</html>
